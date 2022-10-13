@@ -19,6 +19,17 @@ let isCarGoingLeft = false;
 let isCarGoingRight = false;
 const carSpeedValue = 3;
 
+//
+
+let obstangleX = Math.floor(Math.random() * (310 - 70) + 70);
+let obstangleY = Math.floor(Math.random() * (450 - 80) + 80);
+function drawObstacles() {
+  ctx.beginPath();
+  ctx.fillStyle = "blue";
+  ctx.fillRect(obstangleX, obstangleY, 120, 30);
+  ctx.closePath();
+}
+
 // ctx.fillStyle = 'purple';
 // ctx.fillRect(260, 260, 30, 30);
 
@@ -43,8 +54,9 @@ let animationFrameId;
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
   drawScore();
+  drawObstacles();
   ctx.drawImage(car, carX, carY, 50, 90)
   if (isCarGoingLeft) {
     if (carX > 60) {
