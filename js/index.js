@@ -40,15 +40,17 @@ function drawScore() {
 let animationFrameId;
 
 function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
   drawScore();
   ctx.drawImage(car, carX, carY, 50, 90)
   if (isCarGoingLeft) {
-    if (carX > 0) {
+    if (carX > 60) {
       carX -=  carSpeedValue;
     }
   }
   else if (isCarGoingRight) {
-    if (carX < canvas.width - 50) {
+    if (carX < canvas.width - 50 - 58) {
       carX += carSpeedValue;
     }
   }
