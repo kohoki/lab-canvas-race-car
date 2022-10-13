@@ -35,6 +35,8 @@ function drawScore() {
   ctx.closePath();
 };
 
+//
+
 
 
 let animationFrameId;
