@@ -17,23 +17,52 @@ let carX = (canvas.width / 2) - 25;
 let carY = canvas.height -93
 let isCarGoingLeft = false;
 let isCarGoingRight = false;
-const carSpeedValue = 5;
-
+const carSpeedValue = 3;
 
 // ctx.fillStyle = 'purple';
 // ctx.fillRect(260, 260, 30, 30);
 
+// game status
+let gameOver = false;
+
+// Score
+let score = 0;
+function drawScore() {
+  ctx.beginPath();
+  ctx.font = "30px sans-serif";
+  ctx.fillStyle = "white";
+  ctx.fillText(`Score : ${score}`, 90, 40);
+  ctx.closePath();
+};
+
+
+
+let animationFrameId;
+
 function animate() {
-  startScreen.style.display = "none";
+  drawScore();
   ctx.drawImage(car, carX, carY, 50, 90)
   if (isCarGoingLeft) {
     if (carX > 0) {
       carX -=  carSpeedValue;
-    };
-  };
+    }
+  }
+  else if (isCarGoingRight) {
+    if (carX < canvas.width - 50) {
+      carX += carSpeedValue;
+    }
+  }
+
+  if (gameOver) {
+    cancelAnimationFrame(animationFrameId);
+    //restartBtn.style.display = "block";
+  } else {
+    animationFrameId = requestAnimationFrame(animate);
+  }
 };
 
 function startGame() {
+  startScreen.style.display = "none";
   animate()
 };
 
