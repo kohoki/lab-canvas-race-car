@@ -12,21 +12,48 @@ background.src = "../images/road.png"
 // Car
 const car = new Image();
 car.src = "../images/car.png";
+// start point of the car
+let carX = (canvas.width / 2) - 25;
+let carY = canvas.height -93
+let isCarGoingLeft = false;
+let isCarGoingRight = false;
+const carSpeedValue = 5;
+
 
 // ctx.fillStyle = 'purple';
 // ctx.fillRect(260, 260, 30, 30);
 
+function animate() {
+  startScreen.style.display = "none";
+  ctx.drawImage(car, carX, carY, 50, 90)
+  if (isCarGoingLeft) {
+    if (carX > 0) {
+      carX -=  carSpeedValue;
+    };
+  };
+};
 
-console.log(ctx);
+function startGame() {
+  animate()
+};
 
 window.onload = () => {
   ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
   document.getElementById('start-button').onclick = () => {
-    startGame();
+  startGame();
   };
+  document.addEventListener("keydown", event => {
+    if (event.code === "ArrowLeft") {
+      isCarGoingLeft = true;
+    }
+    if (event.code === "ArrowRight") {
+      isCarGoingRight = true;
+    }
+  });
+  
+  document.addEventListener("keyup", event => {
+    isCarGoingLeft = false;
+    isCarGoingRight = false;
+  });
 
-  function startGame() {
-    startScreen.style.display = "none";
-    ctx.drawImage(car, (canvas.width / 2) - 25, canvas.height -90, 50, 90 )
-  }
 };
