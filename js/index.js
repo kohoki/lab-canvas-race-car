@@ -22,8 +22,20 @@ const carSpeedValue = 3;
 //
 
 let obstangleX = Math.floor(Math.random() * (310 - 70) + 70);
-let obstangleY = Math.floor(Math.random() * (450 - 80) + 80);
-function drawObstacles() {
+let obstangleY = 80;
+let obstangleSpeed = 1;
+
+function drawObstacle1() {
+  
+  ctx.beginPath();
+  ctx.fillStyle = "blue";
+  ctx.fillRect(obstangleX, obstangleY, 120, 30);
+  ctx.closePath();
+
+ 
+}
+
+function drawObstacle2() {
   ctx.beginPath();
   ctx.fillStyle = "blue";
   ctx.fillRect(obstangleX, obstangleY, 120, 30);
@@ -39,6 +51,7 @@ let gameOver = false;
 // Score
 let score = 0;
 function drawScore() {
+
   ctx.beginPath();
   ctx.font = "30px sans-serif";
   ctx.fillStyle = "white";
@@ -48,16 +61,15 @@ function drawScore() {
 
 //
 
-
-
 let animationFrameId;
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
   drawScore();
-  drawObstacles();
-  ctx.drawImage(car, carX, carY, 50, 90)
+  drawObstacle1();
+  obstangleY += obstangleSpeed;
+  ctx.drawImage(car, carX, carY, 50, 90);
   if (isCarGoingLeft) {
     if (carX > 60) {
       carX -=  carSpeedValue;
